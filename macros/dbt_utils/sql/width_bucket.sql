@@ -1,4 +1,4 @@
-{% macro sqlserver__width_bucket(expr, min_value, max_value, num_buckets) -%}
+{% macro fabric__width_bucket(expr, min_value, max_value, num_buckets) -%}
 
     {% set bin_size -%}
     (( {{ max_value }} - {{ min_value }} ) / {{ num_buckets }} )
@@ -8,7 +8,7 @@
         case
             when
                 {{ dbt.safe_cast(expr, dbt.type_numeric() ) }} %
-                {{ dbt.safe_cast(bin_size, type.type_numeric() ) }}
+                {{ dbt.safe_cast(bin_size, dbt.type_numeric() ) }}
                  = 0
             then 1
             else 0
